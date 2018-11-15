@@ -1,0 +1,2 @@
+# miniVue
+mini版本Vue,实现了Vue最核心部分代码,该项目是为了对Vue有更加深入了解,根据对源码剖析和自己的理解模拟Vue写的mini版本的Vue
