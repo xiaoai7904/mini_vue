@@ -58,17 +58,17 @@ new MiniVue({
 
 ![目录结构](./image/files.png)
 
-Comilper--->  主要是处理 dom 编译
+Comilper--->主要是处理`dom`编译
 
-Instance--->  程序入口和创建 dom
+Instance--->程序入口和创建`dom`
 
-Observer---> 数据拦截 ，数据订阅，发布，更新
+Observer--->数据拦截,数据订阅，发布，更新
 
-Util--->  程序工具类(debug,nextTick...)
+Util--->程序工具类(debug,nextTick...)
 
 ### 深入响应式原理
 
-先看一张`Vue` 官方文档中的图
+先看一张`Vue`官方文档中的图
 
 ![vue](./image/1.png)
 
@@ -78,9 +78,9 @@ Util--->  程序工具类(debug,nextTick...)
 
 每个组件实例都有相应的 watcher 实例对象，它会在组件渲染的过程中把属性记录为依赖，之后当依赖项的 setter 被调用时，会通知 watcher 重新计算，从而致使它关联的组件得以更新
 
-### MiniVue  响应式原理
+### MiniVue 响应式原理
 
-MiniVue 是对 Vue 进行  深度学习得等的  产品,大部分代码都是来源 Vue 源码， 在 MiniVue 中使用了`Object.defineProperty()`进行数据劫持,来监听`setter`和`getter`
+MiniVue 是对 Vue 进行 深度学习得等的 产品,大部分代码都是来源`Vue`源码， 在`MiniVue`中使用了`Object.defineProperty()`进行数据劫持,来监听`setter`和`getter`
 
 - 数据初始化劫持
 
@@ -139,7 +139,7 @@ Object.defineProperty(obj, key, {
 });
 ```
 
- 这样我们已经可以监听每个数据的变化了，那么监听到变化之后就通知订阅者，所以接下来我们需要实现一个消息订阅器，维护一个数组，用来收集订阅者，数据变动触发`notify`，再调用订阅者的`update`方法
+这样我们已经可以监听每个数据的变化了，那么监听到变化之后就通知订阅者，所以接下来我们需要实现一个消息订阅器，维护一个数组，用来收集订阅者，数据变动触发`notify`，再调用订阅者的`update`方法
 
 ```javascript
 /**
@@ -176,11 +176,11 @@ export default class Dep {
 }
 ```
 
-总结: 响应式原理 ---> 初始化会获取`data`里面的数据，进行数据劫持使用`Object.defineProperty`进行数据劫持, 对`data`里面的每一条数据进行`setter`和`getter`,当有获取数据触发`getter`进行依赖收集,当有数据发生改变触发`setter`更新数据， 并且通知订阅者触发更新
+总结: 响应式原理 ---> 初始化会获取`data`里面的数据，进行数据劫持使用`Object.defineProperty`进行数据劫持, 对`data`里面的每一条数据进行`setter`和`getter`,当有获取数据触发`getter`进行依赖收集,当有数据发生改变触发`setter`更新数据，并且通知订阅者触发更新
 
 ### MiniVue AST
 
-内部通过  遍历 html 文档树，通过正则匹配转换成`AST`树
+内部通过遍历 html 文档树，通过正则匹配转换成`AST`树
 
 ```javascript
 /**
@@ -271,13 +271,13 @@ var astMap = {
 
 通过正则匹配把 Html 转为为 AST 树
 
- 结构如下:
+结构如下:
 
 ![ast](./image/2.png)
 
 ### MiniVue VNode
 
-VNode( 虚拟 Dom)
+VNode(虚拟Dom)
 可以把真实 DOM 树抽象成一棵以 JavaScript 对象构成的抽象树，在修改抽象树数据后将抽象树转化成真实 DOM 重绘到页面上呢？于是虚拟 DOM 出现了，它是真实 DOM 的一层抽象，用属性描述真实 DOM 的各个特性。当它发生变化的时候，就会去修改视图。
 
 可以想象，最简单粗暴的方法就是将整个 DOM 结构用 innerHTML 修改到页面上，但是这样进行重绘整个视图层是相当消耗性能的，我们是不是可以每次只更新它的修改呢？所以 Vue.js 将 DOM 抽象成一个以 JavaScript 对象为节点的虚拟 DOM 树，以 VNode 节点模拟真实 DOM，可以对这颗抽象树进行创建节点、删除节点以及修改节点等操作，在这过程中都不需要操作真实 DOM，只需要操作 JavaScript 对象后只对差异修改，相对于整块的 innerHTML 的粗暴式修改，大大提升了性能。修改以后经过 diff 算法得出一些需要修改的最小单位，再将这些小单位的视图进行更新。这样做减少了很多不需要的 DOM 操作，大大提高了性能。
@@ -339,8 +339,10 @@ export default class VNode {
 ```
 
 \_c ---> 创建标签
+
 \_v ---> 创建文本节点
-\_s --->  字符串序列化
+
+\_s ---> 字符串序列化
 
 \_c:
 
