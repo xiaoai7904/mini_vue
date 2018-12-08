@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="../dist/MiniVue.js"></script>
+    <title>Document</title>
+</head>
+<body>
+    <div id="app" class="aa" :class="classFn" style="font-size: 20px" :style="styleFn">
+        <div>{{a}}</div>
+        <input type="text" v-model="a">
+        <button @click="clickFn">xx</button>
+    </div>
+</body>
+<script>
+    (function(){
+        new MiniVue({
+            el: '#app',
+            data() {
+                return {
+                    a: 1,
+                    color: '#999',
+                    classFn: 'bb'
+                }
+            },
+            computed: {
+                styleFn() {
+                    return {color: this.color}
+                }  
+            },
+            methods: {
+                clickFn() {
+                    console.log('clickFn')
+                    this.a = this.a === 33333 ? 2222 : 33333
+                    this.color = this.color === 'red' ? '#000' : 'red'
+                }
+            },
+            created() {
+                console.log('created')
+            },
+            beforeMount() {
+                console.log('beforeMount')
+            },
+            beforeUpdate() {
+                console.log('beforeUpdate') 
+            },
+            mounted() {
+                console.log('mounted')
+                setTimeout(() => {
+                    this.a = 2222
+                },1000 * 3)
+            },
+        })
+    })()
+</script>
+</html>
