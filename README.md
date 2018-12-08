@@ -1,7 +1,7 @@
 # miniVue
 
 mini 版本 Vue,实现了 Vue 最核心部分代码,该项目是为了对 Vue 有更加深入了解,根据对源码剖析和自己的理解模拟 Vue 写的 mini 版本的 Vue
-
+> 目前没有实现diff算法,每次都是强制更新dom
 ### 实例
 
 ```html
